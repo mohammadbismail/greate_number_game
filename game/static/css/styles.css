@@ -1,0 +1,17 @@
+body {
+  margin: 10% 20%;
+}
+* {
+  text-align: center;
+}
+.wrong,
+.right {
+  background-color: red;
+  color: white;
+  height: 200px;
+  width: 200px;
+  border: 1.5px solid black;
+}
+.right {
+  background-color: green;
+}

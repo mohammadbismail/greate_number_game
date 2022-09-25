@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great number game</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/styles.css' %}">
+</head>
+
+<body>
+    <h2>Welcome to the Great Num Game</h2>
+    <p>I am thinking of a number between 1 to 100, take a guess!</p>
+
+    {% if request.session.input == None %}
+    <form action="/process" method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="rec"></p>
+        <button type="submit" value="submit">Submit</button>
+    </form>
+    {% endif %}
+    {% if request.session.input != None %}
+    {% if request.session.status == "low" %}
+    <div class="wrong">Too Low</div>
+    <form action="/process" method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="rec"></p>
+        <button type="submit" value="submit">Submit</button>
+    </form>
+    {% endif %}
+    {% if request.session.status == "high" %}
+    <div class="wrong">Too High</div>
+    <form action="/process" method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="rec"></p>
+        <button type="submit" value="submit">Submit</button>
+    </form>
+    {% endif %}
+    {% if request.session.status == "equal" %}
+    <div class="right">{{request.session.input}} is correct</div>
+    <form action="/delete" method="POST">
+        {% csrf_token %}
+        <p><input type="text" name="rec"></p>
+        <button type="submit" value="submit">Submit</button>
+    </form>
+    {% endif %}
+    {% endif %}
+</body>
+
+</html>
