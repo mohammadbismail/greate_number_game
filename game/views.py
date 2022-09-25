@@ -27,5 +27,6 @@ def process(request):
 def deleted(request):
     del request.session["input"]
     del request.session["randnum"]
+    del request.session["status"]
 
     return redirect("/")
